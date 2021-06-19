@@ -7,7 +7,7 @@ use App\Models;
 
 class BookSearchResultController extends Controller
 {
-    public function index($key_word="json")
+    public function index($key_word="")
     {        
         // echo $key_word;
         $search_result = Models\GoogleBooksSearch::Search($key_word);

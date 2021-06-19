@@ -14,7 +14,10 @@ class GoogleBooksSearch
         $url = "https://www.googleapis.com/books/v1/volumes?q=" . $key_word;
 
         //google books APIにリクエストして、レスポンスをjsonで受け取る
-        $json = file_get_contents($url);
+        $json = "";
+        if(!($key_word === "")){
+            $json = file_get_contents($url);
+        }
 
         //jsonからインスタンスを生成して返す        
         //echo $json;        
@@ -26,21 +29,25 @@ class GoogleBooksSearch
 
     //インスタンスフィールド
     public $_index = 0;
-    private $_result_list = null;
+    private $_result_list = array();
     public $ResultCount = 0;
     // public $KeyWord = "";
     /////////////////////
 
-    private function __construct($json)
+    private function __construct($json="")
     {
-        $this->_index = 0; //次の要素のindexを表す
-        $json_decode = json_decode($json);
-        $this->_result_list = $json_decode->{"items"};
-        // echo gettype($_result_list) . "\n";
-        $this->ResultCount = count($this->_result_list);
-        // echo $this->ResultCount . "\n";
+        if($json === ""){            
+        }
+        else{
+            $this->_index = 0; //次の要素のindexを表す
+            $json_decode = json_decode($json);
+            $this->_result_list = $json_decode->{"items"};
+            // echo gettype($_result_list) . "\n";
+            $this->ResultCount = count($this->_result_list);
+            // echo $this->ResultCount . "\n";
+        }
+        
     }
-
     //検索結果をイテレーティブに取得する
     public function NextResult()
     {
