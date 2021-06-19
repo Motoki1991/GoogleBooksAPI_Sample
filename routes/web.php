@@ -17,4 +17,4 @@ use App\Http\Controllers\BookSearchResultController;
 Route::get('/', function () {
     return view('Search.Search');
 });
-Route::get('search/{key_word?}',[BookSearchResultController::class, 'index']);
+Route::get('search',[BookSearchResultController::class, 'index']);

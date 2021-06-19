@@ -7,9 +7,11 @@ use App\Models;
 
 class BookSearchResultController extends Controller
 {
-    public function index($key_word="")
+    public function index()
     {        
         // echo $key_word;
+        $request = request();
+        $key_word = $request->{'key_word'};
         $search_result = Models\GoogleBooksSearch::Search($key_word);
         $data = [
             'key_word'=>$key_word,

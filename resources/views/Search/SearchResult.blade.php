@@ -8,11 +8,15 @@
         <h3><?php echo $record->{'volumeInfo'}->{'title'} ?></h3>        
         <h4>著者：
             <?php
-            foreach($record->{'volumeInfo'}->{'authors'} as $author)
-            {
-                echo $author . ",";
+            if(property_exists($record->{'volumeInfo'},'authors')){
+                foreach($record->{'volumeInfo'}->{'authors'} as $author)
+                {
+                    echo $author . ",";
+                }
             }
-            echo $record->{'volumeInfo'}->{'publishedDate'} . "\n";  
+            if(property_exists($record->{'volumeInfo'},'publishedDate')){
+                echo $record->{'volumeInfo'}->{'publishedDate'} . "\n";  
+            }
             ?>            
         </h4>
         <a>
